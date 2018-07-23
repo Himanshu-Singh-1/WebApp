@@ -1,3 +1,5 @@
+var port = process.env.PORT || 8000;
+
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
@@ -25,4 +27,4 @@ http.createServer(function(req, res){
         res.end("No Page Found");
     }
 
-}).listen(3000);
+}).listen(port);
