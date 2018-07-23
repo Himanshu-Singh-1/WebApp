@@ -1,29 +1,93 @@
+<!DOCTYPE html>
 <html>
-	<head>
-		<style>
-		.button {
-			background-color: #4CAF50; /* Green */
-			border: none;
-			color: white;
-			padding: 15px 32px;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 70px;
-		}
-		
-		</style>
+<head>
+<meta charset=utf-8 />
+<title>Display beach images.</title>
+
+
+
+
+
+
+<script>
+
+function display_random_image() 
+{
+	var i = 0;
 	
-		<script type="text/javascript">
-			function addimage() {
-				document.write('<img src="./images/img.jpg" height="400" width="700">')
-			}
-		</script>
-		
-	</head>
+     var theImages = [{
+        src: "./images/img1.jpg",
+        width: "500",
+        height: "400"
+    }, {
+        src: "./images/img2.jpg",
+        width: "500",
+        height: "400"
+    }, {
+        src: "./images/img3.jpg",
+        width: "500",
+        height: "400"
+    }, {
+        src: "./images/img4.jpg",
+        width: "500",
+        height: "400"
+    }
+	];
+    
+    var preBuffer = [];
+    for (var i = 0, j = theImages.length; i < j; i++) {
+        preBuffer[i] = new Image();
+        preBuffer[i].src = theImages[i].src;
+        preBuffer[i].width = theImages[i].width;
+        preBuffer[i].height = theImages[i].height;
+    }
 	
-	<body>
-		<button class="button" onclick="addimage();">Click</button>
-	</body>
+	//get next image
+   function getNextImage(){
+	   
+	   if( typeof display_random_image.counter == 'undefined' ) {
+        display_random_image.counter = 0;
+    }
+    display_random_image.counter++;
+	if(display_random_image.counter>3)
+		display_random_image.counter = 0;
 	
+	   return preBuffer[display_random_image.counter];
+   }
+
+   var newImage = getNextImage();
+   
+   
+// remove the previous images
+var images = document.getElementsByTagName('img');
+var l = images.length;
+for (var p = 0; p < l; p++) {
+    images[0].parentNode.removeChild(images[0]);
+}
+// display the image  
+document.body.appendChild(newImage);
+}
+
+</script>
+
+
+
+
+
+
+
+
+<style type="text/css">
+body {margin-top: 30px;}
+</style> 
+
+
+
+</head>
+<body>
+<div>
+<button id="jsstyle" 
+onclick="display_random_image();">Show Image</button> 
+</div>
+</body>
 </html>
